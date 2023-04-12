@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <pageHeader/>
-
+    <pageHeader title="Task Tracker"/>
+    <Tasks @delete-task="deleteTask" :tasks="tasks"/>
   </div>
 
 </template>
@@ -9,12 +9,46 @@
 <script>
 
 import pageHeader from './components/pageHeader.vue';
+import Tasks from './components/Tasks'
 
 export default {
   name: 'App',
   components: {
-    pageHeader
+    pageHeader,
+    Tasks
+ },
+ data() {
+  return {
+    tasks: []
   }
+ },
+ methods: {
+  deleteTask(id) {
+    this.tasks = this.tasks.filter()
+  }
+ },
+ created() {
+  this.tasks = [
+    {
+      id: 1,
+      text: 'Doc appointment',
+      day: 'March 1rd at 130pm',
+      reminder: true
+    },
+    {
+      id: 2,
+      text: 'Meeting at School',
+      day: 'March 3rd at 130pm',
+      reminder: true
+    },
+    {
+      id: 3,
+      text: 'Food shoping',
+      day: 'March 3rd at 11am',
+      reminder: false
+    },
+  ]
+ }
 }
 </script>
 
