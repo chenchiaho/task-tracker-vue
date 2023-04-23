@@ -1,67 +1,46 @@
 <template>
   <div class="container">
-    <pageHeader title="Task Tracker"/>
-    <Tasks @delete-task="deleteTask" :tasks="tasks"/>
+    <Header @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" />
+    <router-view :showAddTask="showAddTask"></router-view>
+    <Footer />
   </div>
-
 </template>
 
 <script>
-
-import pageHeader from './components/pageHeader.vue';
-import Tasks from './components/Tasks'
-
+import Header from './components/Header'
+import Footer from './components/Footer'
 export default {
   name: 'App',
   components: {
-    pageHeader,
-    Tasks
- },
- data() {
-  return {
-    tasks: []
-  }
- },
- methods: {
-  deleteTask(id) {
-    this.tasks = this.tasks.filter()
-  }
- },
- created() {
-  this.tasks = [
-    {
-      id: 1,
-      text: 'Doc appointment',
-      day: 'March 1rd at 130pm',
-      reminder: true
+    Header,
+    Footer,
+  },
+  data() {
+    return {
+      showAddTask: false,
+    }
+  },
+  methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
     },
-    {
-      id: 2,
-      text: 'Meeting at School',
-      day: 'March 3rd at 130pm',
-      reminder: true
-    },
-    {
-      id: 3,
-      text: 'Food shoping',
-      day: 'March 3rd at 11am',
-      reminder: false
-    },
-  ]
- }
+  },
 }
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body {
   font-family: 'Poppins', sans-serif;
 }
+
 .container {
   max-width: 500px;
   margin: 30px auto;
@@ -71,6 +50,7 @@ body {
   padding: 30px;
   border-radius: 5px;
 }
+
 .btn {
   display: inline-block;
   background: #000;
@@ -84,12 +64,15 @@ body {
   font-size: 15px;
   font-family: inherit;
 }
+
 .btn:focus {
   outline: none;
 }
+
 .btn:active {
   transform: scale(0.98);
 }
+
 .btn-block {
   display: block;
   width: 100%;
